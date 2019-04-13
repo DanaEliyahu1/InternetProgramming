@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head><script type="text/javascript" src="MainScript.js"></script>
+<head><script type="text/javascript" src="Navigation.js"></script>
+
+
+
+
+
+</head>
+
+<body>
+
+<header>
+    <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
+    <a onclick="ShowSection('Game')" href="#"> Game</a>
+    <a onclick="ShowSection('Register')" href="#"> Register</a>
+    <a onclick="ShowSection('Login')" href="#"> Login</a>
+    <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
+    <a onclick="ShowSection('About')" href="#"> About</a>
+</header>
+<section id="Welcome">Welcome</section>
+<section id="Register">Register
+        <form action="" method="post" enctype="text/plain">
+            UserName:<br>
+            <input type="text" name="UserName"><br>
+            Password:<br>
+            <input type="text" name="Password"><br>
+            FirstName:<br>
+            <input type="text" name="FirstName"><br>
+            LastName:<br>
+            <input type="text" name="LastName"><br>
+            Email:<br>
+            <input type="text" name="Email"><br>
+            BirthDate:<br>
+            <input type="date" name="BirthDate"><br>
+            <input type="submit" value="Send">
+            <input type="reset" value="Reset">
+            </form>
+
+
+
+
+
+</section>
+<section id="Login">Login
+
+        <form action="" method="post" enctype="text/plain">
+            UserName:<br>
+            <input type="text" name="UserName"><br>
+            Password:<br>
+            <input type="text" name="Password"><br>
+            <input type="submit" value="Send">
+            <input type="reset" value="Reset">
+            </form>
+
+
+
+
+
+
+
+
+</section>
+<section id="Configuration">Configuration</section>
+<section id="About">About</section>
+<section id="Game">
+SCORE:
+<input id="lblScore" type="text"/>
+<br/>
+TIME:
+<input id="lblTime" type="text"/>
+<br/>
+<canvas id="canvas" height="600" width="600"></canvas>
+
+
+
+
+</section>
+
+</body>
+
+</html>
