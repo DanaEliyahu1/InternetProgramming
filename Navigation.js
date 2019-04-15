@@ -4,7 +4,7 @@
  
  function Start() {
     	//hide all sections
-    ShowSection("Welcome")
+    ShowSection("Game")
     
  }
  function ShowSection(name){
@@ -25,5 +25,14 @@
  }
 
 
- dana eliyahu !!!
+ 
+
+
+
+
+
+
+
+
+ 
 

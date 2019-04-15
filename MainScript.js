@@ -9,6 +9,8 @@
          var canvas;
          var board;
          var context;
+         var pac_direction="left";
+         var monster=[new Object(),new Object()];
    // Start();
 
     function Start() {
@@ -41,10 +43,16 @@
                     } else {
                         board[i][j] = 0;
                     }
+                   
                     cnt--;
                 }
             }
         }
+         for(var m=0;m<monster.length;m++){
+                        monster[m].i=m;
+                        monster[m].j=m;
+                        board[monster[m].i][monster[m].j]=3;
+                    }
         while (food_remain > 0) {
             var emptyCell = findRandomEmptyCell(board);
             board[emptyCell[0]][emptyCell[1]] = 1;
@@ -57,7 +65,7 @@
         addEventListener("keyup", function (e) {
             keysDown[e.code] = false;
         }, false);
-        interval = setInterval(UpdatePosition, 250);
+        interval = setInterval(UpdatePosition, 1000);
     }
 
 
@@ -76,18 +84,71 @@
      */
     function GetKeyPressed() {
         if (keysDown['ArrowUp']) {
+            pac_direction="up";
             return 1;
         }
         if (keysDown['ArrowDown']) {
+            pac_direction="down";
             return 2;
         }
         if (keysDown['ArrowLeft']) {
+            pac_direction="left";
             return 3;
         }
         if (keysDown['ArrowRight']) {
+            pac_direction="right";
             return 4;
         }
     }
+
+    function DrawPacman(pac_direction,center){
+        if (pac_direction==="right"){
+            context.beginPath();
+                    context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                    context.lineTo(center.x, center.y);
+                    context.fillStyle = pac_color; //color
+                    context.fill();
+                    context.beginPath();
+                    context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+                    context.fillStyle = "black"; //color
+                    context.fill();
+        }
+        else if(pac_direction==="left"){
+            context.beginPath();
+            context.arc(center.x, center.y, 30,1.15 * Math.PI,  0.85 * Math.PI); // half circle
+            context.lineTo(center.x, center.y);
+            context.fillStyle = pac_color; //color
+            context.fill();
+            context.beginPath();
+            context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+            context.fillStyle = "black"; //color
+            context.fill();
+        }
+        else if(pac_direction==="down"){
+            context.beginPath();
+            context.arc(center.x, center.y, 30,0.65 * Math.PI,  0.35 * Math.PI); // half circle
+            context.lineTo(center.x, center.y);
+            context.fillStyle = pac_color; //color
+            context.fill();
+            context.beginPath();
+            context.arc(center.x - 15, center.y +5, 5, 0, 2 * Math.PI); // circle
+            context.fillStyle = "black"; //color
+            context.fill();
+        }
+        else if(pac_direction==="up"){
+            context.beginPath();
+            context.arc(center.x, center.y, 30,1.65 * Math.PI,  1.35 * Math.PI); // half circle
+            context.lineTo(center.x, center.y);
+            context.fillStyle = pac_color; //color
+            context.fill();
+            context.beginPath();
+            context.arc(center.x - 15, center.y +5, 5, 0, 2 * Math.PI); // circle
+            context.fillStyle = "black"; //color
+            context.fill();
+        }
+
+    }
+
 
     function Draw() {
         context.clearRect(0, 0, canvas.width, canvas.height); //clean board
@@ -99,15 +160,7 @@
                 center.x = i * 60 + 30;
                 center.y = j * 60 + 30;
                 if (board[i][j] === 2) {
-                    context.beginPath();
-                    context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
-                    context.lineTo(center.x, center.y);
-                    context.fillStyle = pac_color; //color
-                    context.fill();
-                    context.beginPath();
-                    context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
-                    context.fillStyle = "black"; //color
-                    context.fill();
+                    DrawPacman(pac_direction,center);
                 } else if (board[i][j] === 1) {
                     context.beginPath();
                     context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -119,6 +172,12 @@
                     context.fillStyle = "grey"; //color
                     context.fill();
                 }
+                else if (board[i][j] === 3) {
+                    context.beginPath();
+                    context.rect(center.x - 30, center.y - 30, 60, 60);
+                    context.fillStyle = "pink"; //color
+                    context.fill();
+                }
             }
         }
 
@@ -128,6 +187,7 @@
     function UpdatePosition() {
         board[shape.i][shape.j] = 0;
         var x = GetKeyPressed();
+        UpdateMonsterPosition();
         if (x === 1) {
             if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
                 shape.j--;
@@ -163,4 +223,42 @@
         } else {
             Draw();
         }
+
+    }
+
+
+
+    function UpdateMonsterPosition() {
+     
+        for(var m=0;m<monster.length;m++){
+            board[monster[m].i][monster[m].j]=0;
+            var deltax=monster[m].i-shape.i;
+            var deltay=monster[m].j-shape.j;
+            if(Math.abs(deltax)>Math.abs(deltay)){
+                 if(deltax<0){
+                    monster[m].i++;
+                }
+                else{
+                    monster[m].i--;
+                }
+            }
+            else{
+               if(deltay<0){
+                    monster[m].j++;
+                }
+                else{
+                    monster[m].j--;
+                }
+            }
+            board[monster[m].i][monster[m].j]=3;
+        }
+
+
+
+
+
+
+
+
+
     }
