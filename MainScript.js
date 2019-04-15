@@ -51,8 +51,7 @@ function Start() {
         }
     }
     for (var m = 0; m < monster.length; m++) {
-        monster[m].i = m;
-        monster[m].j = m;
+        monster[m]=FindEmptyCorner();
         board[monster[m].i][monster[m].j] = 3;
     }
     MovePoint = FindEmptyCorner();
@@ -69,7 +68,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.code] = false;
     }, false);
-    interval = setInterval(UpdatePosition, 1000);
+    interval = setInterval(UpdatePosition, 200);
 }
 
 
@@ -262,6 +261,34 @@ function UpdateMonsterPosition() {
         }
         board[monster[m].i][monster[m].j] = 3;
     }
+
+}
+
+
+function UpdateMovePointPosition(){
+
+    var randomnum = Math.floor((Math.random() *4) + 1);
+    if (randomnum === 1) {
+        if (MovePoint.j > 0 && board[MovePoint.i][MovePoint.j - 1] !== 4) {
+            MovePoint.j--;
+        }
+    }
+    if (x === 2) {
+        if (MovePoint.j < 9 && board[MovePoint.i][MovePoint.j + 1] !== 4) {
+            MovePoint.j++;
+        }
+    }
+    if (x === 3) {
+        if (MovePoint.i > 0 && board[MovePoint.i - 1][MovePoint.j] !== 4) {
+            MovePoint.i--;
+        }
+    }
+    if (x === 4) {
+        if (MovePoint.i < 9 && board[MovePoint.i + 1][MovePoint.j] !== 4) {
+            MovePoint.i++;
+        }
+    }
+ 
 
 }
 
