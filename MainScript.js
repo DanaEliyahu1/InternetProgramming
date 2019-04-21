@@ -12,13 +12,14 @@ var context;
 var pac_direction = "left";
 var MovePoint = new Object();
 var monster = [new Object(), new Object()];
+var ColorBallsArr = [];
 
 function Start() {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
 
     board = new Array();
-    score = 0;
+   // score = 0;
     pac_color = "yellow";
     var cnt = 100;
     var food_remain = 50;
@@ -35,6 +36,14 @@ function Start() {
                 if (randomNum <= 1.0 * food_remain / cnt) {
                     food_remain--;
                     board[i][j] = 1;
+                    if (ColorBalls === true) {
+                        var Ball = new Object();
+                        Ball.i = i;
+                        Ball.j = j;
+                        Ball.type = FindRandomBallType();
+                        ColorBallsArr.push(Ball);
+                    }
+                    
                 } else if (randomNum < 1.0 * (pacman_remain + food_remain) / cnt) {
                     shape.i = i;
                     shape.j = j;
@@ -154,8 +163,6 @@ function DrawPacman(pac_direction, center) {
 
 function Draw() {
     context.clearRect(0, 0, canvas.width, canvas.height); //clean board
-    lblScore.value = score;
-    lblTime.value = time_elapsed;
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
             var center = new Object();
@@ -164,10 +171,7 @@ function Draw() {
             if (board[i][j] === 2) {
                 DrawPacman(pac_direction, center);
             } else if (board[i][j] === 1) {
-                context.beginPath();
-                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
-                context.fill();
+                drawPoints(i, j, center);
             } else if (board[i][j] === 4) {
                 context.beginPath();
                 context.rect(center.x - 30, center.y - 30, 60, 60);
@@ -191,22 +195,22 @@ function Draw() {
                 context.rect(center.x - 30, center.y - 30, 60, 60);
                 context.fillStyle = "red"; //color
                 context.fill();
-                context.beginPath();
-                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
-                context.fill();
+                drawPoints(i, j, center);
             }
             else if (board[i][j] === 51) {
                 context.beginPath();
                 context.rect(center.x - 30, center.y - 30, 60, 60);
                 context.fillStyle = "pink"; //color
                 context.fill();
-                context.beginPath();
-                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-                context.fillStyle = "black"; //color
-                context.fill();
+                drawPoints(i, j, center);
             }
-
+            else if (board[i][j] === 23) {
+                context.beginPath();
+                context.rect(center.x - 30, center.y - 30, 60, 60);
+                context.fillStyle = "red"; //color
+                context.fill();
+                DrawPacman(pac_direction, center);
+            }
         }
     }
 
@@ -218,7 +222,9 @@ function UpdatePosition() {
     board[shape.i][shape.j] = 0;
     var x = GetKeyPressed();
     UpdateMonsterPosition();
-    UpdateMovePointPosition();
+    if (MovePoint.i !== -1 && MovePoint.j !== -1) {
+        UpdateMovePointPosition();
+    }   
     if (x === 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
             shape.j--;
@@ -240,15 +246,45 @@ function UpdatePosition() {
         }
     }
     if (board[shape.i][shape.j] === 1) {
-        score++;
+        AddPointsToPacman(1);
+        board[shape.i][shape.j] = 2;
     }
-    board[shape.i][shape.j] = 2;
+    else if (board[shape.i][shape.j] === 5) {
+        AddPointsToPacman(50);
+        MovePoint.i = -1;
+        MovePoint.j = -1;
+        board[shape.i][shape.j] = 2;
+    }
+    else if (board[shape.i][shape.j] === 51) {
+        AddPointsToPacman(51);
+        MovePoint.i = -1;
+        MovePoint.j = -1;
+        board[shape.i][shape.j] = 2;
+    } else if (board[shape.i][shape.j] === 3) {
+        LosePointsToPacman(10);
+        board[shape.i][shape.j] = 23;
+        clearInterval(interval);
+        LoseLife();
+        
+    }
+    else if (board[shape.i][shape.j] === 31) {
+        AddPointsToPacman(1);
+        LosePointsToPacman(10);
+        board[shape.i][shape.j] = 23;
+        clearInterval(interval);
+        LoseLife();
+       
+    } else if (board[shape.i][shape.j] === 0) {
+        board[shape.i][shape.j] = 2;
+    }
+    
     var currentTime = new Date();
+    updateCurrentScore();
     time_elapsed = (currentTime - start_time) / 1000;
-    if (score >= 20 && time_elapsed <= 10) {
+    if (GetScore() >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (score === 50) {
+    if (GetScore() === 50) {
         window.clearInterval(interval);
         window.alert("Game completed");
     } else {
@@ -257,7 +293,50 @@ function UpdatePosition() {
 
 }
 
-
+function drawPoints(i, j, center) {
+    if (ColorBalls === false) {
+        context.beginPath();
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+        context.fillStyle = "black"; //color
+        context.fill();
+    } else {
+        var color = -1;
+        for (var cb = 0; cb < ColorBallsArr.length; cb++) {
+            if (ColorBallsArr[cb].i === i && ColorBallsArr[cb].j === j) {
+                color = ColorBallsArr[cb].type;
+                break;
+            }
+        }
+        if (color === 5) {
+            context.beginPath();
+            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+            context.fillStyle = "blue"; //color
+            context.fill();
+        } else if (color === 15) {
+            context.beginPath();
+            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+            context.fillStyle = "purple"; //color
+            context.fill();
+        }
+        else if (color === 25) {
+            context.beginPath();
+            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+            context.fillStyle = "brown"; //color
+            context.fill();
+        }
+        
+    }
+}
+function FindRandomBallType() {
+    var randomnum = Math.floor((Math.random() * 100) + 1);
+    if (randomnum < 60) {
+        return 5;
+    }
+    else if (randomnum < 90) {
+        return 15;
+    }
+    return 25;
+}
 
 function UpdateMonsterPosition() {
 

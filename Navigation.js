@@ -1,8 +1,8 @@
 
  
- window.addEventListener("load",Start,false)
+window.addEventListener("load", StartNavigation,false)
  
- function Start() {
+ function StartNavigation() {
     	//hide all sections
     ShowSection("Game")
     
