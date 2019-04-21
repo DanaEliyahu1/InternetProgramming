@@ -1,7 +1,7 @@
 
 window.addEventListener("load", Start, false)
 var shape = new Object();
-var score;
+//var score;
 var pac_color;
 var start_time;
 var time_elapsed;
@@ -12,8 +12,6 @@ var context;
 var pac_direction = "left";
 var MovePoint = new Object();
 var monster = [new Object(), new Object()];
-
-// Start();
 
 function Start() {
     canvas = document.getElementById("canvas");
@@ -53,6 +51,7 @@ function Start() {
     for (var m = 0; m < monster.length; m++) {
         monster[m]=FindEmptyCorner();
         board[monster[m].i][monster[m].j] = 3;
+
     }
     MovePoint = FindEmptyCorner();
     board[MovePoint.i][MovePoint.j] = 5;
@@ -68,7 +67,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.code] = false;
     }, false);
-    interval = setInterval(UpdatePosition, 200);
+    interval = setInterval(UpdatePosition, 1000);
 }
 
 
@@ -187,6 +186,27 @@ function Draw() {
                 context.fillStyle = "pink"; //color
                 context.fill();
             }
+            else if (board[i][j] === 31) {
+                context.beginPath();
+                context.rect(center.x - 30, center.y - 30, 60, 60);
+                context.fillStyle = "red"; //color
+                context.fill();
+                context.beginPath();
+                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                context.fillStyle = "black"; //color
+                context.fill();
+            }
+            else if (board[i][j] === 51) {
+                context.beginPath();
+                context.rect(center.x - 30, center.y - 30, 60, 60);
+                context.fillStyle = "pink"; //color
+                context.fill();
+                context.beginPath();
+                context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+                context.fillStyle = "black"; //color
+                context.fill();
+            }
+
         }
     }
 
@@ -194,9 +214,11 @@ function Draw() {
 }
 
 function UpdatePosition() {
+    //pacman
     board[shape.i][shape.j] = 0;
     var x = GetKeyPressed();
     UpdateMonsterPosition();
+    UpdateMovePointPosition();
     if (x === 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
             shape.j--;
@@ -240,55 +262,94 @@ function UpdatePosition() {
 function UpdateMonsterPosition() {
 
     for (var m = 0; m < monster.length; m++) {
-        board[monster[m].i][monster[m].j] = 0;
+        if (board[monster[m].i][monster[m].j] === 3) {
+            board[monster[m].i][monster[m].j] = 0;
+        }
+        else if (board[monster[m].i][monster[m].j] === 31) {
+            board[monster[m].i][monster[m].j] = 1;
+        }
+        
         var deltax = monster[m].i - shape.i;
         var deltay = monster[m].j - shape.j;
         if (Math.abs(deltax) > Math.abs(deltay)) {
             if (deltax < 0) {
-                monster[m].i++;
+                if (board[monster[m].i+1][monster[m].j] !== 4) {
+                        monster[m].i++;
+                }
+                
             }
             else {
-                monster[m].i--;
+                if (board[monster[m].i-1][monster[m].j] !== 4) {
+                    monster[m].i--;
+                }
+               
             }
         }
         else {
             if (deltay < 0) {
-                monster[m].j++;
+                if (board[monster[m].i][monster[m].j+1] !== 4) {
+                    monster[m].j++;
+                }
+               
             }
             else {
-                monster[m].j--;
+                if (board[monster[m].i][monster[m].j-1] !== 4) {
+                    monster[m].j--;
+                }
             }
         }
-        board[monster[m].i][monster[m].j] = 3;
+        if (board[monster[m].i][monster[m].j] === 1) {
+            board[monster[m].i][monster[m].j] = 31;
+        }
+        else if (board[monster[m].i][monster[m].j] === 0) {
+            board[monster[m].i][monster[m].j] = 3;
+        }
+        else if (board[monster[m].i][monster[m].j] === 5) {
+            board[monster[m].i][monster[m].j] = 3;
+        }
+        
+        
     }
 
 }
 
-
-function UpdateMovePointPosition(){
-
+function UpdateMovePointPosition() {
+    if (board[MovePoint.i][MovePoint.j] === 5) {
+        board[MovePoint.i][MovePoint.j] = 0;
+    }
+    else if (board[MovePoint.i][MovePoint.j] === 51) {
+        board[MovePoint.i][MovePoint.j] = 1;
+    }
     var randomnum = Math.floor((Math.random() *4) + 1);
     if (randomnum === 1) {
         if (MovePoint.j > 0 && board[MovePoint.i][MovePoint.j - 1] !== 4) {
             MovePoint.j--;
         }
     }
-    if (x === 2) {
+    if (randomnum === 2) {
         if (MovePoint.j < 9 && board[MovePoint.i][MovePoint.j + 1] !== 4) {
             MovePoint.j++;
         }
     }
-    if (x === 3) {
+    if (randomnum === 3) {
         if (MovePoint.i > 0 && board[MovePoint.i - 1][MovePoint.j] !== 4) {
             MovePoint.i--;
         }
     }
-    if (x === 4) {
+    if (randomnum === 4) {
         if (MovePoint.i < 9 && board[MovePoint.i + 1][MovePoint.j] !== 4) {
             MovePoint.i++;
         }
     }
- 
+    if (board[MovePoint.i][MovePoint.j] === 1) {
+        board[MovePoint.i][MovePoint.j] = 51;
+    }
+    else if (board[MovePoint.i][MovePoint.j] === 0) {
+        board[MovePoint.i][MovePoint.j] = 5;
+    }
+    else if (board[MovePoint.i][MovePoint.j]  === 3) {
+        board[MovePoint.i][MovePoint.j] = 3;
+    }
 
 }
 
@@ -308,27 +369,27 @@ function FindEmptyCorner() {
         var randomnum = Math.floor((Math.random() * counter) + 1);
         var notempty = 0;
         if (randomnum === 1) {
-            if (board[0][0] === 0) {
+            if (board[corners[0][0]][corners[0][1]] === 0) {
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 2 - notempty) {
-            if (board[0][9] === 0) {
+            if (board[corners[1][0]][corners[1][1]] === 0) {
                 shape_point.j = 9;
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 3 - notempty) {
-            if (board[9][0] === 0) {
+            if (board[corners[2][0]][corners[2][1]] === 0) {
                 shape_point.i = 9;
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 4 - notempty) {
-            if (board[9][9] === 0) {
+            if (board[corners[3][0]][corners[3][1]] === 0) {
                 shape_point.j = 9;
                 shape_point.i = 9;
                 return shape_point;
