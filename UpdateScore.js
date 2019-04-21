@@ -1,2 +1,0 @@
-var score;
-var score;
