@@ -1,6 +1,6 @@
 var score = 0;
 var lives = 3; 
-ColorBalls = true;
+ColorBalls = false;
 function updateCurrentScore() {
     lblScore.value = score;
     lblTime.value = time_elapsed;

@@ -246,7 +246,7 @@ function UpdatePosition() {
         }
     }
     if (board[shape.i][shape.j] === 1) {
-        AddPointsToPacman(1);
+        AddPointsToPacman(findBallType(shape.i, shape.j));
         board[shape.i][shape.j] = 2;
     }
     else if (board[shape.i][shape.j] === 5) {
@@ -256,7 +256,7 @@ function UpdatePosition() {
         board[shape.i][shape.j] = 2;
     }
     else if (board[shape.i][shape.j] === 51) {
-        AddPointsToPacman(51);
+        AddPointsToPacman(50 + findBallType(shape.i, shape.j));
         MovePoint.i = -1;
         MovePoint.j = -1;
         board[shape.i][shape.j] = 2;
@@ -268,7 +268,7 @@ function UpdatePosition() {
         
     }
     else if (board[shape.i][shape.j] === 31) {
-        AddPointsToPacman(1);
+        AddPointsToPacman(findBallType(shape.i, shape.j));
         LosePointsToPacman(10);
         board[shape.i][shape.j] = 23;
         clearInterval(interval);
@@ -431,7 +431,17 @@ function UpdateMovePointPosition() {
     }
 
 }
-
+function findBallType(i, j) {
+    if (ColorBalls === false) {
+        return 1;
+    }
+    for (var cb = 0; cb < ColorBallsArr.length; cb++) {
+        if (ColorBallsArr[cb].i === i && ColorBallsArr[cb].j === j) {
+            return ColorBallsArr[cb].type;
+            
+        }
+    }
+}
 function FindEmptyCorner() {
     var shape_point = new Object();
     shape_point.i = 0;
