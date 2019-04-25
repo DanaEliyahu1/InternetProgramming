@@ -1,9 +1,9 @@
 
-window.addEventListener("load", Start, false)
+//window.addEventListener("load", Start, false)
 var shape = new Object();
 //var score;
 var pac_color;
-var start_time;
+
 var time_elapsed;
 var interval;
 var canvas;
@@ -13,18 +13,19 @@ var pac_direction = "left";
 var MovePoint = new Object();
 var monster = [new Object(), new Object()];
 var ColorBallsArr = [];
+var MoveMonstersAndMovingPoint = false;
 
 function Start() {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
-
+    initTimer();
+    clearInterval(interval);
     board = new Array();
    // score = 0;
     pac_color = "yellow";
     var cnt = 100;
     var food_remain = 50;
     var pacman_remain = 1;
-    start_time = new Date();
     for (var i = 0; i < 10; i++) {
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
@@ -76,7 +77,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.code] = false;
     }, false);
-    interval = setInterval(UpdatePosition, 1000);
+    interval = setInterval(UpdatePosition, 400);
 }
 
 
@@ -221,10 +222,13 @@ function UpdatePosition() {
     //pacman
     board[shape.i][shape.j] = 0;
     var x = GetKeyPressed();
-    UpdateMonsterPosition();
-    if (MovePoint.i !== -1 && MovePoint.j !== -1) {
-        UpdateMovePointPosition();
-    }   
+    if (MoveMonstersAndMovingPoint) {
+        UpdateMonsterPosition();
+        if (MovePoint.i !== -1 && MovePoint.j !== -1) {
+            UpdateMovePointPosition();
+        }  
+    }
+    MoveMonstersAndMovingPoint = !(MoveMonstersAndMovingPoint);
     if (x === 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
             shape.j--;
@@ -277,16 +281,13 @@ function UpdatePosition() {
     } else if (board[shape.i][shape.j] === 0) {
         board[shape.i][shape.j] = 2;
     }
-    
-    var currentTime = new Date();
-    updateCurrentScore();
-    time_elapsed = (currentTime - start_time) / 1000;
+    time_elapsed=updateCurrentScore();
     if (GetScore() >= 20 && time_elapsed <= 10) {
         pac_color = "green";
     }
-    if (GetScore() === 50) {
+    if (time_elapsed >= TimerLimit) {
         window.clearInterval(interval);
-        window.alert("Game completed");
+        endGame();
     } else {
         Draw();
     }

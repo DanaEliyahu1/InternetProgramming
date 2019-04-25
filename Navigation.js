@@ -21,7 +21,12 @@ window.addEventListener("load", StartNavigation,false)
     var Game = document.getElementById('Game');
     Game.style.visibility="hidden";
     var selected = document.getElementById(name);
-    	selected.style.visibility="visible";
+     selected.style.visibility = "visible";
+     if (name === "Game") {
+         initScore();
+         Start();
+     }
+     
  }
 
 
