@@ -6,6 +6,15 @@ var TimerLimit = 60;
 var UserArray = [];
 var defaultUser = new Object();
 ColorBalls = true;
+var laft_key='ArrowLeft';
+var right_key='ArrowRight';
+var up_key='ArrowUp';
+var down_key='ArrowDown';
+var num_of_balls=50;
+var color_ball5="blue";
+var color_ball25="brown";
+var color_ball15="purple";
+var num_of_monster=1;
 defaultUser.username = "a";
 defaultUser.password = "a";
 UserArray.push(defaultUser);
@@ -70,3 +79,5 @@ function endGame() {
         window.alert("We Have A Winner!!!\n" + "Your Score Was: " + score);
     }
 }
+
+

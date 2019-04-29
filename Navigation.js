@@ -26,6 +26,9 @@ window.addEventListener("load", StartNavigation,false)
          initScore();
          Start();
      }
+     else{
+        window.clearInterval(interval);
+     }
      
  }
 

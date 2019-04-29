@@ -11,9 +11,8 @@ var board;
 var context;
 var pac_direction = "left";
 var MovePoint = new Object();
-var monster = [new Object(), new Object()];
+var monster = [];
 var ColorBallsArr = [];
-var MoveMonstersAndMovingPoint = false;
 
 function Start() {
     canvas = document.getElementById("canvas");
@@ -24,7 +23,7 @@ function Start() {
    // score = 0;
     pac_color = "yellow";
     var cnt = 100;
-    var food_remain = 50;
+    var food_remain = num_of_balls;
     var pacman_remain = 1;
     for (var i = 0; i < 10; i++) {
         board[i] = new Array();
@@ -58,7 +57,7 @@ function Start() {
             }
         }
     }
-    for (var m = 0; m < monster.length; m++) {
+    for (var m = 0; m < num_of_monster; m++) {
         monster[m]=FindEmptyCorner();
         board[monster[m].i][monster[m].j] = 3;
 
@@ -95,19 +94,19 @@ function findRandomEmptyCell(board) {
  * @return {number}
  */
 function GetKeyPressed() {
-    if (keysDown['ArrowUp']) {
+    if (keysDown[up_key]) {
         pac_direction = "up";
         return 1;
     }
-    if (keysDown['ArrowDown']) {
+    if (keysDown[down_key]) {
         pac_direction = "down";
         return 2;
     }
-    if (keysDown['ArrowLeft']) {
+    if (keysDown[laft_key]) {
         pac_direction = "left";
         return 3;
     }
-    if (keysDown['ArrowRight']) {
+    if (keysDown[right_key]) {
         pac_direction = "right";
         return 4;
     }
@@ -222,13 +221,10 @@ function UpdatePosition() {
     //pacman
     board[shape.i][shape.j] = 0;
     var x = GetKeyPressed();
-    if (MoveMonstersAndMovingPoint) {
         UpdateMonsterPosition();
         if (MovePoint.i !== -1 && MovePoint.j !== -1) {
             UpdateMovePointPosition();
         }  
-    }
-    MoveMonstersAndMovingPoint = !(MoveMonstersAndMovingPoint);
     if (x === 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
             shape.j--;
@@ -311,18 +307,18 @@ function drawPoints(i, j, center) {
         if (color === 5) {
             context.beginPath();
             context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle = "blue"; //color
+            context.fillStyle =color_ball5; //color
             context.fill();
         } else if (color === 15) {
             context.beginPath();
             context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle = "purple"; //color
+            context.fillStyle = color_ball15; //color
             context.fill();
         }
         else if (color === 25) {
             context.beginPath();
             context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle = "brown"; //color
+            context.fillStyle =color_ball25; //color
             context.fill();
         }
         
