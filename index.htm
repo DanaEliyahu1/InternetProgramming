@@ -86,7 +86,25 @@
     3<input type="radio" onclick="chooseNumOfMonster(this)" value="3" name="monsterNumInput">
     <br>
     <br>
-    <input type="button" onclick="rundomValues()" value="Random" />
+    do you want color balls?
+    <br>
+    <input type="checkbox" onclick="colormode(this)" checked="checked">
+    <br>
+    select ball colors
+    <br>
+    5 <input onchange="updateColor(this)" name="5Picker" type="color" value="#0000ff">
+    <br>
+    15 <input onchange="updateColor(this)" name="15Picker" type="color" value="#800080">
+    <br>
+    25 <input onchange="updateColor(this)" name="25Picker" type="color" value="#A52A2A">
+
+
+
+
+
+
+    <br>
+    <input type="button" onclick="rundomValues()" value="Random">
     <br />    
 
 

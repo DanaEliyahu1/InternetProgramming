@@ -58,8 +58,28 @@ num_of_monster= parseInt(value.value);
          num_of_balls = Math.floor((Math.random() *40) + 50);
          TimerLimit=Math.floor((Math.random()*60)+60);
          num_of_monster=Math.floor((Math.random()*3)+1);
-            
+
+    }
+    function updateColor(event){
+        if(event.name === "5Picker"){
+            color_ball5=event.value;
+        }
+        else if(event.name === "15Picker"){
+            color_ball15=event.value;
+        }
+        else if(event.name === "25Picker"){
+            color_ball25=event.value;
+        }
+    
+    }
 
 
-
+    function colormode(event){
+        if(event.checked===true){
+            ColorBalls=true;
+        }
+        else{
+            ColorBalls=false;
+        }
+        
     }
