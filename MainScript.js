@@ -23,7 +23,7 @@ function Start() {
    // score = 0;
     pac_color = "yellow";
     var cnt = 100;
-    var food_remain = num_of_balls;
+    var food_remain = currnumofballs;
     var pacman_remain = 1;
     for (var i = 0; i < 10; i++) {
         board[i] = new Array();
@@ -247,6 +247,7 @@ function UpdatePosition() {
     }
     if (board[shape.i][shape.j] === 1) {
         AddPointsToPacman(findBallType(shape.i, shape.j));
+        currnumofballs=currnumofballs-1;
         board[shape.i][shape.j] = 2;
     }
     else if (board[shape.i][shape.j] === 5) {
@@ -257,6 +258,7 @@ function UpdatePosition() {
     }
     else if (board[shape.i][shape.j] === 51) {
         AddPointsToPacman(50 + findBallType(shape.i, shape.j));
+        currnumofballs=currnumofballs-1;
         MovePoint.i = -1;
         MovePoint.j = -1;
         board[shape.i][shape.j] = 2;
@@ -271,6 +273,7 @@ function UpdatePosition() {
         AddPointsToPacman(findBallType(shape.i, shape.j));
         LosePointsToPacman(10);
         board[shape.i][shape.j] = 23;
+        currnumofballs=currnumofballs-1;
         clearInterval(interval);
         LoseLife();
        

@@ -11,6 +11,7 @@ var right_key='ArrowRight';
 var up_key='ArrowUp';
 var down_key='ArrowDown';
 var num_of_balls=50;
+var currnumofballs=50;
 var color_ball5="blue";
 var color_ball25="brown";
 var color_ball15="purple";
@@ -39,6 +40,7 @@ function initScore() {
     start_time = new Date();
     score = 0;
     lives = 3; 
+    currnumofballs=num_of_balls;
     document.getElementById("lblScore").innerHTML =0;
     document.getElementById("lblTime").innerHTML = 0;
     document.getElementById("lblName").innerHTML = name;

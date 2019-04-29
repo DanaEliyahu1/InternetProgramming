@@ -24,6 +24,23 @@
     <input type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
     
     </section>
+    <section id="Game">
+        NAME:
+        <label id="lblName"></label>
+        SCORE:
+        <label id="lblScore"></label>
+        TIME:
+        <label id="lblTime"></label>
+        LOSSES:
+        <label id="lblLosses"></label>
+        <input type="button" onclick="initScore();Start();" value="Restart Game" />
+        <br />
+        <canvas id="canvas" height="600" width="600"></canvas>
+    
+    
+    
+    
+    </section>
 <section id="Register">
     Register
         <form action="" method="post" enctype="text/plain">
@@ -110,23 +127,7 @@
 
 </section>
 <section id="About">About</section>
-<section id="Game">
-    NAME:
-    <label id="lblName"></label>
-    SCORE:
-    <label id="lblScore"></label>
-    TIME:
-    <label id="lblTime"></label>
-    LOSSES:
-    <label id="lblLosses"></label>
-    <input type="button" onclick="initScore();Start();" value="Restart Game" />
-    <br />
-    <canvas id="canvas" height="600" width="600"></canvas>
 
-
-
-
-</section>
 
 </body>
 

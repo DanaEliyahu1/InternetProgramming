@@ -58,7 +58,9 @@ num_of_monster= parseInt(value.value);
          num_of_balls = Math.floor((Math.random() *40) + 50);
          TimerLimit=Math.floor((Math.random()*60)+60);
          num_of_monster=Math.floor((Math.random()*3)+1);
-
+         color_ball5=getRandomColor();
+         color_ball15=getRandomColor();
+         color_ball25=getRandomColor();
     }
     function updateColor(event){
         if(event.name === "5Picker"){
@@ -83,3 +85,11 @@ num_of_monster= parseInt(value.value);
         }
         
     }
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
