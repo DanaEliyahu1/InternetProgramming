@@ -20,7 +20,7 @@ function Start() {
     initTimer();
     clearInterval(interval);
     board = new Array();
-   // score = 0;
+
     pac_color = "yellow";
     var cnt = 100;
     var food_remain = currnumofballs;
@@ -68,6 +68,13 @@ function Start() {
         var emptyCell = findRandomEmptyCell(board);
         board[emptyCell[0]][emptyCell[1]] = 1;
         food_remain--;
+        if (ColorBalls === true) {
+            var Ball = new Object();
+            Ball.i = emptyCell[0];
+            Ball.j = emptyCell[1];
+            Ball.type = FindRandomBallType();
+            ColorBallsArr.push(Ball);
+        }
     }
     keysDown = {};
     addEventListener("keydown", function (e) {
@@ -211,6 +218,30 @@ function Draw() {
                 context.fill();
                 DrawPacman(pac_direction, center);
             }
+            else if (board[i][j] === 6) {
+                context.beginPath();
+                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
+                context.fillStyle = "LightSalmon"; //color
+                context.fill();
+            }
+            else if (board[i][j] === 61) {
+                context.beginPath();
+                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
+                context.fillStyle = "LightSalmon"; //color
+                context.fill();
+                drawPoints(i, j, center);
+            }
+            else if (board[i][j] === 65) {
+                context.beginPath();
+                context.rect(center.x - 30, center.y - 30, 60, 60);
+                context.fillStyle = "pink"; //color
+                context.fill();
+                context.beginPath();
+                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
+                context.fillStyle = "LightSalmon"; //color
+                context.fill();  
+            }
+
         }
     }
 
@@ -225,6 +256,7 @@ function UpdatePosition() {
         if (MovePoint.i !== -1 && MovePoint.j !== -1) {
             UpdateMovePointPosition();
         }  
+        addClock();
     if (x === 1) {
         if (shape.j > 0 && board[shape.i][shape.j - 1] !== 4) {
             shape.j--;
@@ -274,10 +306,32 @@ function UpdatePosition() {
         LosePointsToPacman(10);
         board[shape.i][shape.j] = 23;
         currnumofballs=currnumofballs-1;
-        clearInterval(interval);
+        stopgame();
         LoseLife();
        
-    } else if (board[shape.i][shape.j] === 0) {
+    }else if (board[shape.i][shape.j] === 6) {
+        initTimer();
+        board[shape.i][shape.j] = 2;
+    }
+    else if (board[shape.i][shape.j] === 61) {
+        initTimer();
+        AddPointsToPacman(findBallType(shape.i, shape.j));
+        currnumofballs=currnumofballs-1;
+        board[shape.i][shape.j] = 2;
+    }
+    else if (board[shape.i][shape.j] === 65) {
+        AddPointsToPacman(50 + findBallType(shape.i, shape.j));
+        currnumofballs=currnumofballs-1;
+        MovePoint.i = -1;
+        MovePoint.j = -1;
+        initTimer();
+        board[shape.i][shape.j] = 2;
+
+    }
+    
+    
+    
+    else if (board[shape.i][shape.j] === 0) {
         board[shape.i][shape.j] = 2;
     }
     time_elapsed=updateCurrentScore();
@@ -285,7 +339,6 @@ function UpdatePosition() {
         pac_color = "green";
     }
     if (time_elapsed >= TimerLimit) {
-        window.clearInterval(interval);
         endGame();
     } else {
         Draw();
@@ -399,6 +452,9 @@ function UpdateMovePointPosition() {
     else if (board[MovePoint.i][MovePoint.j] === 51) {
         board[MovePoint.i][MovePoint.j] = 1;
     }
+    else if (board[MovePoint.i][MovePoint.j] === 65) {
+        board[MovePoint.i][MovePoint.j] = 6;
+    }
     var randomnum = Math.floor((Math.random() *4) + 1);
     if (randomnum === 1) {
         if (MovePoint.j > 0 && board[MovePoint.i][MovePoint.j - 1] !== 4) {
@@ -428,6 +484,9 @@ function UpdateMovePointPosition() {
     }
     else if (board[MovePoint.i][MovePoint.j]  === 3) {
         board[MovePoint.i][MovePoint.j] = 3;
+    }
+    else if (board[MovePoint.i][MovePoint.j]  === 6) {
+        board[MovePoint.i][MovePoint.j] =65;
     }
 
 }
@@ -494,4 +553,26 @@ function FindEmptyCorner() {
         corners[3][0]=corners[0][0]-1;
     }
 }
+}
+function addClock(){
+    var randomNum=Math.floor((Math.random() * 30) + 1);
+    if(randomNum===1){
+        var i=Math.floor((Math.random() * 10));
+        var j=Math.floor((Math.random() * 10));
+        if(board[i][j]===0){
+            board[i][j]=6;
+        }
+        else if(board[i][j]===1){
+            board[i][j]=61;
+        }
+        else if(board[i][j]===5){
+            board[i][j]=65;
+        }
+    }
+
+
+
+
+
+
 }

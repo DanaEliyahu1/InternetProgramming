@@ -27,7 +27,7 @@ window.addEventListener("load", StartNavigation,false)
          Start();
      }
      else{
-        window.clearInterval(interval);
+        stopgame();
      }
      
  }

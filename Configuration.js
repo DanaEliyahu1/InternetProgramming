@@ -16,6 +16,7 @@ var color_ball5="blue";
 var color_ball25="brown";
 var color_ball15="purple";
 var num_of_monster=1;
+var audio= new Audio("pacman song.mp3");
 defaultUser.username = "a";
 defaultUser.password = "a";
 UserArray.push(defaultUser);
@@ -31,11 +32,13 @@ function updateCurrentScore() {
     //lblScore.value = score;
     // lblTime.value = time_elapsed;
     document.getElementById("lblScore").innerHTML = score;
+    
     document.getElementById("lblTime").innerHTML = time_elapsed;
     var losses = 3 - lives;
     document.getElementById("lblLosses").innerHTML = losses;
     return time_elapsed;
 }
+
 function initScore() {
     start_time = new Date();
     score = 0;
@@ -45,6 +48,7 @@ function initScore() {
     document.getElementById("lblTime").innerHTML = 0;
     document.getElementById("lblName").innerHTML = name;
     document.getElementById("lblLosses").innerHTML = 0;
+    //audio.play();
     
 
 }
@@ -53,9 +57,15 @@ function initTimer() {
     document.getElementById("lblTime").innerHTML = 0;
 }
 function AddPointsToPacman(value) {
+    if(isNaN(score+value)){
+        window.alert(time_elapsed+","+score+","+currnumofballs);
+    }
         score = score + value;
 }
 function LosePointsToPacman(value) {
+    if(isNaN(score-value)){
+        window.alert(time_elapsed+","+score+","+currnumofballs);
+    }
     score = score - value;
 }
 function GetScore() {
@@ -74,12 +84,17 @@ function LoseGame() {
     window.alert("You Lost! \n" + "Your Score Was: " + score);
 }
 function endGame() {
+    stopgame();
     if (score < 150) {
         window.alert("You Can Do Better\n" + "Your Score Was: " + score);
     }
     else {
         window.alert("We Have A Winner!!!\n" + "Your Score Was: " + score);
     }
+}
+function stopgame(){
+    audio.pause();
+    clearInterval(interval);
 }
 
 
