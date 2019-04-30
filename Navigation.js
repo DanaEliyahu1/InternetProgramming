@@ -29,8 +29,12 @@ window.addEventListener("load", StartNavigation,false)
      else{
         stopgame();
      }
+     if(name==="About"){
+      document.getElementById('aboutmodal').style.display='block';
+     }
+     }
      
- }
+
 
 
  

@@ -21,6 +21,30 @@ defaultUser.username = "a";
 defaultUser.password = "a";
 UserArray.push(defaultUser);
 
+
+function login(){
+    var c_username= $.trim($("input[name=UserName_l]").val());
+    var c_password=$.trim($("input[name=Password_l]").val());
+    for (var ua = 0; ua < UserArray.length; ua++) {
+        if (UserArray[ua].username === c_username) {
+            if(UserArray[ua].password===c_password){
+                ShowSection("Game");
+                return ;
+            }
+            else{
+                window.alert("password is incorrect");
+                return;
+            }
+
+        }
+    }
+    window.alert("username does not exist");
+
+
+}
+
+
+
 function validInput(){
 
     if(fieldNotEmpty()){
@@ -47,7 +71,17 @@ function validInput(){
 
             window.alert("your email is not valid");
         }
-               
+        var newregister=new Object();
+        newregister.username=$("input[name=UserName]").val();
+        newregister.password=$("input[name=Password]").val();
+        newregister.firstname=$("input[name=FirstName]").val();
+        newregister.lastname=$("input[name=LastName]").val();
+        newregister.email=$("input[name=Email]").val();
+        newregister.birthdate=$("input[name=BirthDate]").val();
+
+        UserArray.push(newregister);
+        ShowSection("Login");
+
     }
     else{
         window.alert("please fill all the fields");

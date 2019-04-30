@@ -45,7 +45,7 @@
     </section>
 <section id="Register">
     Register
-        <form  id="registerform" onsubmit="validInput()" method="post" enctype="text/plain">
+        <form  id="registerform" onsubmit="validInput(); return false" method="post" enctype="text/plain">
             UserName:<br>
             <input type="text" name="UserName"><br>
             Password:<br>
@@ -63,11 +63,11 @@
             </form>
 </section>
 <section id="Login">Login
-        <form action="" method="post" enctype="text/plain">
+        <form method="post" onsubmit="login(); return false" enctype="text/plain">
             UserName:<br>
-            <input type="text" name="UserName"><br>
+            <input type="text" name="UserName_l"><br>
             Password:<br>
-            <input type="text" name="Password"><br>
+            <input type="text" name="Password_l"><br>
             <input type="submit" value="Send">
             <input type="reset" value="Reset">
             </form>
@@ -128,7 +128,22 @@
 
 
 </section>
-<section id="About">About</section>
+<section id="About">About
+
+  <div id="aboutmodal" onclick="document.getElementById('aboutmodal').style.display='none'" class="AboutM">
+    <div class="modal">
+     
+        <span onclick="document.getElementById('aboutmodal').style.display='none'" >&times;</span>
+        <p>Some text. Some text. Some text.</p>
+        <p>Some text. Some text. Some text.</p>
+      
+    </div>
+  </div>
+</div>
+
+
+
+</section>
 
 
 </body>
