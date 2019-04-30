@@ -21,8 +21,49 @@ defaultUser.username = "a";
 defaultUser.password = "a";
 UserArray.push(defaultUser);
 
+function validInput(){
 
+    if(fieldNotEmpty()){
+   
+        if( $.trim($("input[name=Password]").val()).length<8)  {
+            window.alert("the password is too short");
+        }
+        if(!$.trim($("input[name=Password]").val()).match(/[a-z]/i)){
+            window.alert("your password needs to contain letters");
+        }
+        if(!$.trim($("input[name=Password]").val()).match(/\d+/g)){
 
+            window.alert("your password needs to contain numbers");
+        }
+        if($.trim($("input[name=FirstName]").val()).match(/\d+/g)){
+
+            window.alert("your first name should not contain numbers");
+        }
+        if($.trim($("input[name=LastName]").val()).match(/\d+/g)){
+
+            window.alert("your last name should not contain numbers");
+        }
+        if(!$.trim($("input[name=Email]").val()).match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/)){
+
+            window.alert("your email is not valid");
+        }
+               
+    }
+    else{
+        window.alert("please fill all the fields");
+    }
+}
+
+function fieldNotEmpty(){
+    var isValid=true;
+    $("#registerform > input").filter(function(){
+     if( $.trim($(this).val()).length===0)  {
+         isValid=false;
+     }
+
+    })
+return isValid;
+}
 
 
 
