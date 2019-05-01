@@ -1,74 +1,46 @@
-
-
-
 body{
-
 background-image: url("BG.jpg");
-
 background-size:cover; 
 font-family:"Calibri";
 font-style: bold;
 font-size: 25px;
 text-align: center;
-
-
-
+font-weight:bold;
 }
-footer{
-position: relative;
-    top:1000 px;
-    left:20 px;
-    background-color: aqua;
-
+header{
+    top: 0 px;
+    left: 0 px;
 }
 
-
+menu{
+    font-size: 30px;
+}
+#mainArea{
+    height: 900px;
+    width: 900px;
+}
 section{
     top:100 px;
     left:150 px;
     position: absolute;
     height: 800 px;
     width: 800 px;
-
 }
+footer{
+    background-color: aqua;
+}
+
 .modal{
-    margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px}
-
-    
+    margin:auto;background-color:#fff;position:relative;padding:0;outline:0;width:600px;
+}
+ 
 .AboutM{
-   padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4)
-
-
+   padding-top:100px;position:fixed;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgb(0,0,0);background-color:rgba(0,0,0,0.4);
 }
 
 
-
-header{
-
-top: 0 px;
-left: 0 px;
-
-}
-
-menu{
-
-top:100 px;
-left: 30 px;
-font-size: 30px;
-
-
-}
-a:link{
-    color: aliceblue;
-
-}
-#gameLabels{
-    font-size: 20px;
-    background-color: rgb(28, 73, 45);
+a{
     color: white;
-}
-#Game{
-    width: 800px;
 }
 
 input{
@@ -76,8 +48,10 @@ input{
     color: rgb(68, 42, 160);
     height: 30px;
     font-size: 20px;
+}
 
-
-
-
+#gameLabels{
+    font-size: 20px;
+    background-color: rgb(28, 73, 45);
+    color: white;
 }

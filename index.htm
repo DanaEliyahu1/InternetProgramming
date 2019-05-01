@@ -3,7 +3,7 @@
 
 <head>
     <script type="text/javascript" src="jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="Style.css"/>
+    <link rel="stylesheet" type="text/css" href="Style.css" />
     <script type="text/javascript" src="Configuration.js"></script>
     <script type="text/javascript" src="MainScript.js"></script>
     <script type="text/javascript" src="Navigation.js"></script>
@@ -11,170 +11,154 @@
 
 </head>
 
-<body style="font-size: 100 pt; font-weight:bold ;" >
+<body>
 
-<header style="font-size: 35px">
-    <img id="logo" src="logo.jpg" width="150 px" height="60">
-    <br>
-   Application: Spring Pacman
-   <br>
-   Partners: Dana and Nimrod
-   
+    <header style="font-size: 35px">
+        <img id="logo" src="logo.jpg" width="150 px" height="60">
+        <br> Application: Spring Pacman
+        <br> Partners: Dana and Nimrod
 
-</header>
-<menu>
- <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
-    <a onclick="ShowSection('Game')" href="#"> Game</a>
-    <a onclick="ShowSection('Register')" href="#"> Register</a>
-    <a onclick="ShowSection('Login')" href="#"> Login</a>
-    <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
-    <a onclick="ShowSection('About')" href="#"> About</a>
+
+    </header>
+    <menu>
+        <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
+        <a onclick="ShowSection('Game')" href="#"> Game</a>
+        <a onclick="ShowSection('Register')" href="#"> Register</a>
+        <a onclick="ShowSection('Login')" href="#"> Login</a>
+        <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
+        <a onclick="document.getElementById('aboutmodal').style.display='block';" href="#"> About</a>
 
 
 
-</menu>
+    </menu>
+    <div id="mainArea">
+        <section id="Welcome">Welcome
+            <input type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
+            <input type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
+        </section>
 
+        <section id="Game" width="800">
+            <div id="gameLabels">
+                NAME:
+                <label id="lblName"></label>
+                SCORE:
+                <label id="lblScore"></label>
+                TIME:
+                <label id="lblTime"></label>
+                LOSSES:
+                <label id="lblLosses"></label>
+                <input type="button" onclick="initScore();Start();" value="Restart Game" />
+            </div>
+            <br />
 
-<footer>This site was created for Ben Gurion University. You can send mail to our adress dannim@post.pacman.co.il </footer>
+            <canvas id="canvas" height="600" width="600"></canvas>
+        </section>
 
-
-<section id="Welcome">Welcome
-    <input type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
-    <input type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
-    
-
-
-    </section>
-    <section id="Game">
-        <div id="gameLabels">
-        NAME:
-        <label id="lblName"></label>
-        SCORE:
-        <label id="lblScore"></label>
-        TIME:
-        <label id="lblTime"></label>
-        LOSSES:
-        <label id="lblLosses"></label>
-        <input type="button" onclick="initScore();Start();" value="Restart Game" />
-       </div> 
-        <br />
-       
-        <canvas  id="canvas" height="600" width="600"></canvas>
-    
-    
-    
-    
-    </section>
-<section id="Register">
-    Register
-        <form  id="registerform" onsubmit="validInput(); return false" method="post" enctype="text/plain">
-            UserName:<br>
-            <input type="text" name="UserName"><br>
-            Password:<br>
-            <input type="password name="Password"><br>
-            FirstName:<br>
-            <input type="text" name="FirstName"><br>
-            LastName:<br>
-            <input type="text" name="LastName"><br>
-            Email:<br>
-            <input type="text" name="Email"><br>
-            BirthDate:<br>
-            <input type="date" name="BirthDate"><br>
-            <input type="submit" value="Send">
-            <input type="reset" value="Reset">
+        <section id="Register">
+            Register
+            <form id="registerform" onsubmit="validInput(); return false" method="post" enctype="text/plain">
+                UserName:
+                <br>
+                <input type="text" name="UserName">
+                <br> Password:
+                <br>
+                <input type="password" name="Password">
+                <br> FirstName:
+                <br>
+                <input type="text" name="FirstName">
+                <br> LastName:
+                <br>
+                <input type="text" name="LastName">
+                <br> Email:
+                <br>
+                <input type="text" name="Email">
+                <br> BirthDate:
+                <br>
+                <input type="date" name="BirthDate">
+                <br>
+                <input type="submit" value="Send">
+                <input type="reset" value="Reset">
             </form>
-</section>
-<section id="Login">Login
-        <form method="post" onsubmit="login(); return false" enctype="text/plain">
-            UserName:<br>
-            <input type="text" name="UserName_l"><br>
-            Password:<br>
-            <input type="password" name="Password_l"><br>
-            <input type="submit" value="Send">
-            <input type="reset" value="Reset">
+        </section>
+
+        <section id="Login">Login
+            <form method="post" onsubmit="login(); return false" enctype="text/plain">
+                UserName:
+                <br>
+                <input type="text" name="UserName_l">
+                <br> Password:
+                <br>
+                <input type="password" name="Password_l">
+                <br>
+                <input type="submit" value="Send">
+                <input type="reset" value="Reset">
             </form>
+        </section>
+
+        <section id="Configuration">
+            Configuration
+            <br />
+            <input type="button" onclick="chooseKeys()" value="click here to select Game buttons" />
+            <p id="instructionForKeys"> </p>
+            <p id="chosenKeys"> </p>
+            <br />
+            <br /> select number of ball
+            <input id="num of balls" type="text" value="50">
+            <br>
+            <input type="button" onclick="chooseNumOfBalls()" value="submit" />
+            <br />
+            <br /> select game time
+            <input id="time of game" type="text" value="60">
+            <br>
+            <input type="button" onclick="chooseGameTime()" value="submit" />
+            <br />
+            <br /> select number of monsters: 1
+            <input type="radio" onclick="chooseNumOfMonster(this)" value="1" checked="checked" name="monsterNumInput"> 2
+            <input type="radio" onclick="chooseNumOfMonster(this)" value="2" name="monsterNumInput"> 3
+            <input type="radio" onclick="chooseNumOfMonster(this)" value="3" name="monsterNumInput">
+            <br>
+            <br> do you want color balls?
+            <br>
+            <input type="checkbox" onclick="colormode(this)" checked="checked">
+            <br> select ball colors
+            <br> 5
+            <input onchange="updateColor(this)" name="5Picker" type="color" value="#0000ff">
+            <br> 15
+            <input onchange="updateColor(this)" name="15Picker" type="color" value="#800080">
+            <br> 25
+            <input onchange="updateColor(this)" name="25Picker" type="color" value="#A52A2A">
 
 
 
 
 
 
-
-    
-</section>
-<section id="Configuration">
-    Configuration <br />
-    <input type="button" onclick="chooseKeys()" value="click here to select Game buttons" />
-    <p id="instructionForKeys">    </p>
-    <p id="chosenKeys">    </p>
-    <br />
-    <br />
-    select number of ball 
-    <input id ="num of balls" type="text" value="50">
-    <br>
-    <input type="button" onclick="chooseNumOfBalls()" value="submit" />
-    <br />
-    <br />
-    select game time 
-    <input id ="time of game" type="text" value="60">
-    <br>
-    <input type="button" onclick="chooseGameTime()" value="submit" />
-    <br />
-    <br />
-    select number of monsters:   
-    1<input type="radio" onclick="chooseNumOfMonster(this)" value="1" checked="checked" name="monsterNumInput">
-    2<input type="radio" onclick="chooseNumOfMonster(this)" value="2" name="monsterNumInput">
-    3<input type="radio" onclick="chooseNumOfMonster(this)" value="3" name="monsterNumInput">
-    <br>
-    <br>
-    do you want color balls?
-    <br>
-    <input type="checkbox" onclick="colormode(this)" checked="checked">
-    <br>
-    select ball colors
-    <br>
-    5 <input onchange="updateColor(this)" name="5Picker" type="color" value="#0000ff">
-    <br>
-    15 <input onchange="updateColor(this)" name="15Picker" type="color" value="#800080">
-    <br>
-    25 <input onchange="updateColor(this)" name="25Picker" type="color" value="#A52A2A">
+            <br>
+            <input type="button" onclick="rundomValues()" value="Random">
+            <br />
 
 
+        </section>
+        <section id="About">
 
+            <div id="aboutmodal" onclick="closemodal(this);" class="AboutM">
+                <div class="modal">
 
-
-
-    <br>
-    <input type="button" onclick="rundomValues()" value="Random">
-    <br />    
-
-
-</section>
-<section id="About">About
-
-  <div id="aboutmodal" onclick="closemodal(this);"
-  
-  class="AboutM">
-    <div class="modal">
-     
-        <span onclick="document.getElementById('aboutmodal').style.display='none'" >&times;</span>
-        <p>Partners:  Dana Eliyahu and Nimrod Haiat</p>
-        <p>We used jQuery only for input checks. we used modal-template from w3s for the "About" section and the css file. 
-            <br>We used the single page navigation code from lab 3.
-            <br> Also, we used template for playing audio in the "Game" section.
-        <br>The main challenge in this project was to debug the code , mainly the java script part.
-        <br> But we dealt with it successfully, we used google chrome's tools to debug.
-        <br> The project was very informative and we really like the results.   
-     </p>
-      
+                    <span onclick="document.getElementById('aboutmodal').style.display='none'">&times;</span>
+                    <p>Partners: Dana Eliyahu and Nimrod Haiat</p>
+                    <p>We used jQuery only for input checks. we used modal-template from w3s for the "About" section and the
+                        css file.
+                        <br>We used the single page navigation code from lab 3.
+                        <br> Also, we used template for playing audio in the "Game" section.
+                        <br>The main challenge in this project was to debug the code , mainly the java script part.
+                        <br> But we dealt with it successfully, we used google chrome's tools to debug.
+                        <br> The project was very informative and we really like the results.
+                    </p>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
-</div>
-
-
-
-</section>
-
+    <footer>©This site was created for Ben Gurion University. You can send mail to our address dannim@post.pacman.co.il </footer>
 
 </body>
 

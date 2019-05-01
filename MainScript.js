@@ -30,7 +30,7 @@ function Start() {
         board[i] = new Array();
         //put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
         for (var j = 0; j < 10; j++) {
-            if ((i === 3 && j === 3) || (i === 3 && j === 4) || (i === 3 && j === 5) || (i === 6 && j === 1) || (i === 6 && j === 2)) {
+            if ((i === 3 && j === 3) || (i === 3 && j === 4) || (i === 3 && j === 5) || (i === 6 && j === 1) || (i === 6 && j === 2)|| (i === 7 && j === 8)|| (i === 8 && j === 8)) {
                 board[i][j] = 4;
             } else {
                 var randomNum = Math.random();
@@ -349,8 +349,8 @@ function UpdatePosition() {
 function drawPoints(i, j, center) {
     if (ColorBalls === false) {
         context.beginPath();
-        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-        context.fillStyle = "black"; //color
+        context.arc(center.x, center.y, 15, 0, 2 * Math.PI); 
+        context.fillStyle = "black"; 
         context.fill();
     } else {
         var color = -1;
@@ -360,23 +360,34 @@ function drawPoints(i, j, center) {
                 break;
             }
         }
+        context.beginPath();
+        context.arc(center.x+8, center.y+8, 10, 0, 2 * Math.PI); 
         if (color === 5) {
-            context.beginPath();
-            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle =color_ball5; //color
-            context.fill();
+            context.fillStyle =color_ball5;    
         } else if (color === 15) {
-            context.beginPath();
-            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle = color_ball15; //color
-            context.fill();
+            context.fillStyle = color_ball15; 
         }
         else if (color === 25) {
-            context.beginPath();
-            context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-            context.fillStyle =color_ball25; //color
-            context.fill();
+            context.fillStyle =color_ball25; 
         }
+        context.fill();
+        context.beginPath();
+        context.arc(center.x+8, center.y-8, 10, 0, 2 * Math.PI); 
+        context.fill();
+        context.beginPath();
+        context.arc(center.x-8, center.y+8, 10, 0, 2 * Math.PI); 
+        context.fill();
+        context.beginPath();
+        context.arc(center.x-8, center.y-8, 10, 0, 2 * Math.PI); 
+        context.fill();
+
+        context.beginPath();
+        context.arc(center.x, center.y, 8, 0, 2 * Math.PI); 
+        context.fillStyle ="#b3daff"; 
+        context.fill();
+        //context.fillStyle ="black"; 
+        //context.font = "15px Calibri";
+        //context.fillText("25", center.x-7, center.y+4);
         
     }
 }
