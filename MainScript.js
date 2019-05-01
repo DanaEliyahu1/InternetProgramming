@@ -14,6 +14,7 @@ var MovePoint = new Object();
 var monster = [];
 var ColorBallsArr = [];
 
+
 function Start() {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");

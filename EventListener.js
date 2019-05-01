@@ -1,3 +1,12 @@
+window.addEventListener("click",closemodal);
+
+
+
+window.addEventListener("keydown",closemodal);
+
+
+
+
 function chooseKeys() {
     var keys = [];
     document.getElementById("instructionForKeys").innerHTML 
@@ -92,4 +101,14 @@ num_of_monster= parseInt(value.value);
           color += letters[Math.floor(Math.random() * 16)];
         }
         return color;
+      }
+
+      function closemodal(event){
+        if(event.target==document.getElementById('aboutmodal')){
+ document.getElementById('aboutmodal').style.display='none'
+        }
+        if(event.keyCode===27){
+            document.getElementById('aboutmodal').style.display='none'
+        }
+       
       }

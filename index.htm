@@ -14,17 +14,34 @@
 <body>
 
 <header>
-    <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
+   Application: Spring Pacman
+   <br>
+   Partners: Dana and Nimrod
+   <img src="" />
+
+</header>
+<menu>
+ <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
     <a onclick="ShowSection('Game')" href="#"> Game</a>
     <a onclick="ShowSection('Register')" href="#"> Register</a>
     <a onclick="ShowSection('Login')" href="#"> Login</a>
     <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
     <a onclick="ShowSection('About')" href="#"> About</a>
-</header>
+
+
+
+</menu>
+
+
+<footer>This site was created for Ben Gurion University. You can send mail to our adress dannim@post.pacman.co.il </footer>
+
+
 <section id="Welcome">Welcome
     <input type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
     <input type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
     
+
+
     </section>
     <section id="Game">
         NAME:
@@ -49,7 +66,7 @@
             UserName:<br>
             <input type="text" name="UserName"><br>
             Password:<br>
-            <input type="text" name="Password"><br>
+            <input type="password name="Password"><br>
             FirstName:<br>
             <input type="text" name="FirstName"><br>
             LastName:<br>
@@ -67,7 +84,7 @@
             UserName:<br>
             <input type="text" name="UserName_l"><br>
             Password:<br>
-            <input type="text" name="Password_l"><br>
+            <input type="password" name="Password_l"><br>
             <input type="submit" value="Send">
             <input type="reset" value="Reset">
             </form>
@@ -130,12 +147,20 @@
 </section>
 <section id="About">About
 
-  <div id="aboutmodal" onclick="document.getElementById('aboutmodal').style.display='none'" class="AboutM">
+  <div id="aboutmodal" onclick="closemodal(this);"
+  
+  class="AboutM">
     <div class="modal">
      
         <span onclick="document.getElementById('aboutmodal').style.display='none'" >&times;</span>
-        <p>Some text. Some text. Some text.</p>
-        <p>Some text. Some text. Some text.</p>
+        <p>Partners:  Dana Eliyahu and Nimrod Haiat</p>
+        <p>We used jQuery only for input checks. we used modal-template from w3s for the "About" section and the css file. 
+            <br>We used the single page navigation code from lab 3.
+            <br> Also, we used template for playing audio in the "Game" section.
+        <br>The main challenge in this project was to debug the code , mainly the java script part.
+        <br> But we dealt with it successfully, we used google chrome's tools to debug.
+        <br> The project was very informative and we really like the results.   
+     </p>
       
     </div>
   </div>
