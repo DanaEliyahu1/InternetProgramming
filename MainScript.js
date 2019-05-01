@@ -84,7 +84,7 @@ function Start() {
     addEventListener("keyup", function (e) {
         keysDown[e.code] = false;
     }, false);
-    interval = setInterval(UpdatePosition, 400);
+    interval = setInterval(UpdatePosition, 500);
 }
 
 
@@ -170,7 +170,11 @@ function DrawPacman(pac_direction, center) {
 
 
 function Draw() {
-    context.clearRect(0, 0, canvas.width, canvas.height); //clean board
+    context.clearRect(0, 0, canvas.width, canvas.height);
+     context.beginPath();
+     context.rect(0,0 ,canvas.width, canvas.height);
+     context.fillStyle= "#ddffcc";
+     context.fill();
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
             var center = new Object();
@@ -187,60 +191,52 @@ function Draw() {
                 context.fill();
             }
             else if (board[i][j] === 3) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "red"; //color
-                context.fill();
+                var img=new Image();
+                img.src="monster.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
             }
             else if (board[i][j] === 5) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "pink"; //color
-                context.fill();
+                var img=new Image();
+                img.src="flower.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
             }
             else if (board[i][j] === 31) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "red"; //color
-                context.fill();
+                var img=new Image();
+                img.src="monster.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
                 drawPoints(i, j, center);
             }
             else if (board[i][j] === 51) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "pink"; //color
-                context.fill();
+                var img=new Image();
+                img.src="flower.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
                 drawPoints(i, j, center);
             }
             else if (board[i][j] === 23) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "red"; //color
-                context.fill();
+                var img=new Image();
+                img.src="monster.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
                 DrawPacman(pac_direction, center);
             }
             else if (board[i][j] === 6) {
-                context.beginPath();
-                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
-                context.fillStyle = "LightSalmon"; //color
-                context.fill();
+                var img=new Image();
+                img.src="clock.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
             }
             else if (board[i][j] === 61) {
-                context.beginPath();
-                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
-                context.fillStyle = "LightSalmon"; //color
-                context.fill();
+                var img=new Image();
+                img.src="clock.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
                 drawPoints(i, j, center);
             }
             else if (board[i][j] === 65) {
-                context.beginPath();
-                context.rect(center.x - 30, center.y - 30, 60, 60);
-                context.fillStyle = "pink"; //color
-                context.fill();
-                context.beginPath();
-                context.arc(center.x, center.y, 30, 0, 2 * Math.PI);
-                context.fillStyle = "LightSalmon"; //color
-                context.fill();  
+                var img=new Image();
+                img.src="clock.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
+                var img=new Image();
+                img.src="flower.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
+                
             }
 
         }
@@ -329,7 +325,10 @@ function UpdatePosition() {
         board[shape.i][shape.j] = 2;
 
     }
-    
+    if(currnumofballs===0){
+        Draw();
+        endGame();
+    }
     
     
     else if (board[shape.i][shape.j] === 0) {
@@ -556,7 +555,7 @@ function FindEmptyCorner() {
 }
 }
 function addClock(){
-    var randomNum=Math.floor((Math.random() * 30) + 1);
+    var randomNum=Math.floor((Math.random() * 90) + 1);
     if(randomNum===1){
         var i=Math.floor((Math.random() * 10));
         var j=Math.floor((Math.random() * 10));

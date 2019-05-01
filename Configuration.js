@@ -28,6 +28,7 @@ function login(){
     for (var ua = 0; ua < UserArray.length; ua++) {
         if (UserArray[ua].username === c_username) {
             if(UserArray[ua].password===c_password){
+                name=c_username;
                 ShowSection("Game");
                 return ;
             }
@@ -157,6 +158,7 @@ function LoseLife() {
 }
 function LoseGame() {
     window.alert("You Lost! \n" + "Your Score Was: " + score);
+    stopgame();
 }
 function endGame() {
     stopgame();
