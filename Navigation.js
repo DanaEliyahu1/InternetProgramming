@@ -32,7 +32,7 @@ window.addEventListener("load", StartNavigation,false)
      if(name==="About"){
       document.getElementById('aboutmodal').style.display='block';
      }
-     }
+}
      
 
 

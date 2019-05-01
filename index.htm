@@ -11,9 +11,9 @@
 
 </head>
 
-<body style="font-size: 100 px; font-weight:bold ;" >
+<body style="font-size: 100 pt; font-weight:bold ;" >
 
-<header>
+<header style="font-size: 35px">
     <img id="logo" src="logo.jpg" width="150 px" height="60">
     <br>
    Application: Spring Pacman
@@ -46,6 +46,7 @@
 
     </section>
     <section id="Game">
+        <div id="gameLabels">
         NAME:
         <label id="lblName"></label>
         SCORE:
@@ -55,8 +56,10 @@
         LOSSES:
         <label id="lblLosses"></label>
         <input type="button" onclick="initScore();Start();" value="Restart Game" />
+       </div> 
         <br />
-        <canvas id="canvas" height="600" width="600"></canvas>
+       
+        <canvas  id="canvas" height="600" width="600"></canvas>
     
     
     
