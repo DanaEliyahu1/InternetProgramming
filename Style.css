@@ -10,6 +10,7 @@ font-weight:bold;
 
 menu{
     font-size: 30px;
+    margin: 3px;
 }
 #mainArea{
     height: 670px;
@@ -50,4 +51,8 @@ input{
     font-size: 20px;
     background-color: rgb(28, 73, 45);
     color: white;
+}
+header{
+    font-size: 20px;
+    font-weight: bolder; 
 }
