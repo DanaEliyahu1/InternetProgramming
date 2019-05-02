@@ -21,7 +21,7 @@
     </header>
     <menu>
         <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
-        <a onclick="ShowSection('Game')" href="#"> Game</a>
+        <a onclick="checklogin()" href="#"> Game</a>
         <a onclick="ShowSection('Register')" href="#"> Register</a>
         <a onclick="ShowSection('Login')" href="#"> Login</a>
         <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
@@ -32,8 +32,8 @@
     </menu>
     <div id="mainArea">
         <section id="Welcome">Welcome
-            <input type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
-            <input type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
+            <input style="height: 70px; width: 150 px;" type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
+            <input style="height: 70px; width: 150 px;" type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
         </section>
 
         <section id="Game" width="800">

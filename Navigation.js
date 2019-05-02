@@ -38,7 +38,12 @@ function ShowSection(name) {
         stopgame();
     }
     }
-    
-  
-
 }
+ function checklogin(){
+     if(name!=="null"){
+         ShowSection('Game')
+     }
+     else{
+        window.alert("You Need To Log In First");
+     }
+ }
