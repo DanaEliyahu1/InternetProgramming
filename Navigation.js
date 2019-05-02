@@ -8,8 +8,15 @@ function StartNavigation() {
     document.getElementById('aboutmodal').style.display = 'none';
 
 }
-function ShowSection(name) {
-    var Welcome = document.getElementById('Welcome');
+function ShowSection(name) { 
+     if(name==="About"){
+  
+        var selected = document.getElementById(name);
+        selected.style.visibility = "visible"; 
+        document.getElementById('aboutmodal').style.display='block';
+    }
+    else{
+        var Welcome = document.getElementById('Welcome');
     Welcome.style.visibility = "hidden";
     var Register = document.getElementById('Register');
     Register.style.visibility = "hidden";
@@ -19,6 +26,8 @@ function ShowSection(name) {
     Configuration.style.visibility = "hidden";
     var Game = document.getElementById('Game');
     Game.style.visibility = "hidden";
+    var About = document.getElementById('About');
+    About.style.visibility = "hidden";
     var selected = document.getElementById(name);
     selected.style.visibility = "visible";
     if (name === "Game") {
@@ -28,5 +37,8 @@ function ShowSection(name) {
     else {
         stopgame();
     }
+    }
+    
+  
 
 }

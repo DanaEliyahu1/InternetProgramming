@@ -1,6 +1,6 @@
 var score = 0;
 var lives = 3; 
-var name = "loading...";
+var name = "null";
 var start_time = new Date();
 var TimerLimit = 60;
 var UserArray = [];
@@ -47,32 +47,44 @@ function login(){
 
 
 function validInput(){
+    var flag=false;
 
     if(fieldNotEmpty()){
    
         if( $.trim($("input[name=Password]").val()).length<8)  {
             window.alert("the password is too short");
         }
-        if(!$.trim($("input[name=Password]").val()).match(/[a-z]/i)){
+       
+       else if(!$.trim($("input[name=Password]").val()).match(/[a-z]/i)){
             window.alert("your password needs to contain letters");
         }
-        if(!$.trim($("input[name=Password]").val()).match(/\d+/g)){
+        else if(!$.trim($("input[name=Password]").val()).match(/\d+/g)){
 
             window.alert("your password needs to contain numbers");
         }
-        if($.trim($("input[name=FirstName]").val()).match(/\d+/g)){
+        else if($.trim($("input[name=FirstName]").val()).match(/\d+/g)){
 
             window.alert("your first name should not contain numbers");
         }
-        if($.trim($("input[name=LastName]").val()).match(/\d+/g)){
+        else if($.trim($("input[name=LastName]").val()).match(/\d+/g)){
 
             window.alert("your last name should not contain numbers");
         }
-        if(!$.trim($("input[name=Email]").val()).match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/)){
+        else if(!$.trim($("input[name=Email]").val()).match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/)){
 
             window.alert("your email is not valid");
         }
-        var newregister=new Object();
+        else {
+            for (var ua = 0; ua < UserArray.length; ua++) {
+            if (UserArray[ua].username === $("input[name=UserName]").val()) {
+                window.alert("The username is taken. Choose another one.");
+                flag=true;
+            }}
+        }
+        
+
+        if(!flag){
+              var newregister=new Object();
         newregister.username=$("input[name=UserName]").val();
         newregister.password=$("input[name=Password]").val();
         newregister.firstname=$("input[name=FirstName]").val();
@@ -82,7 +94,8 @@ function validInput(){
 
         UserArray.push(newregister);
         ShowSection("Login");
-
+        }
+      
     }
     else{
         window.alert("please fill all the fields");

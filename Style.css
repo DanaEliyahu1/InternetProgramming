@@ -12,14 +12,14 @@ menu{
     font-size: 30px;
 }
 #mainArea{
-    height: 900px;
+    height: 670px;
     width: 900px;
     margin: 0 auto;
 }
 section{
     position: absolute;
-    height: 800 px;
-    width: 800 px;
+    height: 650px;
+    width: 800px;
 }
 footer{
     background-color: aqua;

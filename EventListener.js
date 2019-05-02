@@ -105,10 +105,15 @@ num_of_monster= parseInt(value.value);
 
       function closemodal(event){
         if(event.target==document.getElementById('aboutmodal')){
- document.getElementById('aboutmodal').style.display='none'
+ document.getElementById('aboutmodal').style.display='none';
+ var About = document.getElementById('About');
+ About.style.visibility = "hidden";
+
         }
         if(event.keyCode===27){
-            document.getElementById('aboutmodal').style.display='none'
+            document.getElementById('aboutmodal').style.display='none';
+            var About = document.getElementById('About');
+            About.style.visibility = "hidden";
         }
        
       }
