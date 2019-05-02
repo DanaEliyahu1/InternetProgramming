@@ -7,10 +7,6 @@ font-size: 25px;
 text-align: center;
 font-weight:bold;
 }
-header{
-    top: 0 px;
-    left: 0 px;
-}
 
 menu{
     font-size: 30px;
@@ -18,10 +14,9 @@ menu{
 #mainArea{
     height: 900px;
     width: 900px;
+    margin: 0 auto;
 }
 section{
-    top:100 px;
-    left:150 px;
     position: absolute;
     height: 800 px;
     width: 800 px;
@@ -45,9 +40,10 @@ a{
 
 input{
     font-weight: bolder;
-    color: rgb(68, 42, 160);
+    color: rgb(0, 0, 0);
     height: 30px;
     font-size: 20px;
+    background-color: rgb(113, 211, 93);
 }
 
 #gameLabels{
