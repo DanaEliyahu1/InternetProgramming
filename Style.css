@@ -15,13 +15,13 @@ menu{
     margin: 3px;
 }
 #mainArea{
-    height: 670px;
-    width: 900px;
+    height: 635px;
+    width: 800px;
     margin: 0 auto;
 }
 section{
     position: absolute;
-    height: 650px;
+    height: 635px;
     width: 800px;
 }
 footer{
@@ -56,6 +56,6 @@ input{
 }
 header{
     position: absolute;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: bolder; 
 }
