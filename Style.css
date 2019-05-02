@@ -9,6 +9,8 @@ font-weight:bold;
 }
 
 menu{
+    position: absolute;
+    top:200px;
     font-size: 30px;
     margin: 3px;
 }
@@ -53,6 +55,7 @@ input{
     color: white;
 }
 header{
-    font-size: 20px;
+    position: absolute;
+    font-size: 35px;
     font-weight: bolder; 
 }

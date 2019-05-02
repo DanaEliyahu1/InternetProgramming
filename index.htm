@@ -20,18 +20,18 @@
 
     </header>
     <menu>
-        <a onclick="ShowSection('Welcome')" href="#">Welcome</a>
-        <a onclick="checklogin()" href="#"> Game</a>
-        <a onclick="ShowSection('Register')" href="#"> Register</a>
-        <a onclick="ShowSection('Login')" href="#"> Login</a>
-        <a onclick="ShowSection('Configuration')" href="#"> Configuration</a>
-        <a onclick="ShowSection('About');" href="#"> About</a>
+        <a onclick="ShowSection('Welcome')" href="#">Welcome</a><br>
+        <a onclick="checklogin()" href="#"> Game</a><br>
+        <a onclick="ShowSection('Register')" href="#"> Register</a><br>
+        <a onclick="ShowSection('Login')" href="#"> Login</a><br>
+        <a onclick="ShowSection('Configuration')" href="#"> Configuration</a><br>
+        <a onclick="ShowSection('About');" href="#"> About</a><br>
 
 
 
     </menu>
     <div id="mainArea">
-        <section id="Welcome">Welcome
+        <section id="Welcome">Welcome!
             <input style="height: 70px; width: 150 px;" type="button" id="LogInButton" onclick="ShowSection('Login')" value="Log In" />
             <input style="height: 70px; width: 150 px;" type="button" id="RegisterButton" onclick="ShowSection('Register')" value="Register" />
         </section>
@@ -54,7 +54,6 @@
         </section>
 
         <section id="Register">
-            Register
             <form id="registerform" onsubmit="validInput(); return false" method="post" enctype="text/plain">
                 UserName:
                 <br>
@@ -80,7 +79,7 @@
             </form>
         </section>
 
-        <section id="Login">Login
+        <section id="Login">
             <form method="post" onsubmit="login(); return false" enctype="text/plain">
                 UserName:
                 <br>
@@ -95,7 +94,6 @@
         </section>
 
         <section id="Configuration">
-            Configuration
             <br />
             <input type="button" onclick="chooseKeys()" value="click here to select Game buttons" />
             <p id="instructionForKeys"> </p>
@@ -126,10 +124,6 @@
             <input onchange="updateColor(this)" name="15Picker" type="color" value="#800080">
             <br> 25
             <input onchange="updateColor(this)" name="25Picker" type="color" value="#A52A2A">
-
-
-
-
 
 
             <br>
