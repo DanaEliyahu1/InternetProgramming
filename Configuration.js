@@ -29,7 +29,7 @@ function login(){
         if (UserArray[ua].username === c_username) {
             if(UserArray[ua].password===c_password){
                 name=c_username;
-                ShowSection("Game");
+                ShowSection("Configuration");
                 return ;
             }
             else{
