@@ -32,6 +32,9 @@ var num=parseInt(document.getElementById("num of balls").value);
 if (num >=50 && num <=90 ){
     num_of_balls=num;
     window.alert("The num that you chose is: " + num);
+    if(num>80){
+       num=num-20;
+    }
 }
 else{
     window.alert("choose number between 50 to 90 balls");
@@ -64,7 +67,7 @@ num_of_monster= parseInt(value.value);
          right_key='ArrowRight'
          up_key='ArrowUp';
          down_key='ArrowDown';
-         num_of_balls = Math.floor((Math.random() *40) + 50);
+         num_of_balls = Math.floor((Math.random() *40) + 35);
          TimerLimit=Math.floor((Math.random()*60)+60);
          num_of_monster=Math.floor((Math.random()*3)+1);
          color_ball5=getRandomColor();

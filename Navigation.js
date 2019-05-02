@@ -4,7 +4,7 @@ window.addEventListener("load", StartNavigation, false)
 
 function StartNavigation() {
     //hide all sections
-    ShowSection("Game")
+    ShowSection("Welcome")
     document.getElementById('aboutmodal').style.display = 'none';
 
 }

@@ -118,10 +118,7 @@ return isValid;
 function updateCurrentScore() {
     var currentTime = new Date();
     time_elapsed = (currentTime - start_time) / 1000;
-    //lblScore.value = score;
-    // lblTime.value = time_elapsed;
     document.getElementById("lblScore").innerHTML = score;
-    
     document.getElementById("lblTime").innerHTML = time_elapsed;
     var losses = 3 - lives;
     document.getElementById("lblLosses").innerHTML = losses;
@@ -137,7 +134,7 @@ function initScore() {
     document.getElementById("lblTime").innerHTML = 0;
     document.getElementById("lblName").innerHTML = name;
     document.getElementById("lblLosses").innerHTML = 0;
-    //audio.play();
+    audio.play();
     
 
 }

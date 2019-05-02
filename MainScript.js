@@ -65,18 +65,19 @@ function Start() {
     }
     MovePoint = FindEmptyCorner();
     board[MovePoint.i][MovePoint.j] = 5;
-    while (food_remain > 0) {
-        var emptyCell = findRandomEmptyCell(board);
-        board[emptyCell[0]][emptyCell[1]] = 1;
-        food_remain--;
-        if (ColorBalls === true) {
-            var Ball = new Object();
-            Ball.i = emptyCell[0];
-            Ball.j = emptyCell[1];
-            Ball.type = FindRandomBallType();
-            ColorBallsArr.push(Ball);
-        }
-    }
+    // while (food_remain > 0) {
+    //     var emptyCell = findRandomEmptyCell(board);
+    //     board[emptyCell[0]][emptyCell[1]] = 1;
+    //     food_remain--;
+    //     if (ColorBalls === true) {
+    //         var Ball = new Object();
+    //         Ball.i = emptyCell[0];
+    //         Ball.j = emptyCell[1];
+    //         Ball.type = FindRandomBallType();
+    //         ColorBallsArr.push(Ball);
+    //     }
+    // }
+    currnumofballs=currnumofballs-food_remain;
     keysDown = {};
     addEventListener("keydown", function (e) {
         keysDown[e.code] = true;
@@ -527,7 +528,9 @@ function FindEmptyCorner() {
     shape_point.i = 0;
     shape_point.j = 0;
     var corners = [[0, 0], [0, 9], [9, 0], [9, 9]];
-    while(true){
+    var limit=0;
+    while(limit<9){
+    limit=limit+1;
     var counter = 0;
     for (var i = 0; i < 4; i++) {
         if (board[corners[i][0]][corners[i][1]] === 0) {
@@ -539,28 +542,32 @@ function FindEmptyCorner() {
         var notempty = 0;
         if (randomnum === 1) {
             if (board[corners[0][0]][corners[0][1]] === 0) {
+                shape_point.j = corners[0][1];
+                shape_point.i = corners[0][0];
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 2 - notempty) {
             if (board[corners[1][0]][corners[1][1]] === 0) {
-                shape_point.j = 9;
+                shape_point.j = corners[1][1];
+                shape_point.i = corners[1][0];
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 3 - notempty) {
             if (board[corners[2][0]][corners[2][1]] === 0) {
-                shape_point.i = 9;
+                shape_point.j = corners[2][1];
+                shape_point.i = corners[2][0];
                 return shape_point;
             }
             else notempty++;
         }
         if (randomnum === 4 - notempty) {
             if (board[corners[3][0]][corners[3][1]] === 0) {
-                shape_point.j = 9;
-                shape_point.i = 9;
+                shape_point.j = corners[3][1];
+                shape_point.i = corners[3][0];
                 return shape_point;
             }
             else notempty++;
@@ -573,7 +580,11 @@ function FindEmptyCorner() {
         corners[2][0]=corners[0][0]-1;
         corners[3][0]=corners[0][0]-1;
     }
-}
+    }
+    var ans= findRandomEmptyCell(board) ;
+    shape_point.i = ans[0];
+    shape_point.j = ans[1];
+    return shape_point;
 }
 function addClock(){
     var randomNum=Math.floor((Math.random() * 30) + 1);
