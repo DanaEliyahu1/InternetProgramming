@@ -10,13 +10,13 @@ window.addEventListener("keydown",closemodal);
 function chooseKeys() {
     var keys = [];
     document.getElementById("instructionForKeys").innerHTML 
-        = "On your keyboard click on the keys you want for moving:1. left 2. right 3. up 4. down";
+        = "push on the keys you want for:1. left 2. right 3. up 4. down";
     document.addEventListener('keydown', function (event) {
         var key = event.code; // "a", "1", "Shift", etc.
         keys.push(key);
         if (keys.length > 3) {
             document.getElementById("chosenKeys").innerHTML
-                = " You chose left" + keys[0] + " right:" + keys[1] + " up:"+keys[2] + " down:"+keys[3];
+                = "left:" + keys[0] + " right:" + keys[1] + " up:"+keys[2] + " down:"+keys[3];
     laft_key=keys[0];
     right_key=keys[1];
     up_key=keys[2];

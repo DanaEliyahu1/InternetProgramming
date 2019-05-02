@@ -238,6 +238,11 @@ function Draw() {
                 context.drawImage(img,center.x-30,center.y-30,60,60);
                 
             }
+            else if (board[i][j] === 7) {
+                var img=new Image();
+                img.src="butter.png";
+                context.drawImage(img,center.x-30,center.y-30,60,60);
+            }
 
         }
     }
@@ -325,6 +330,11 @@ function UpdatePosition() {
         board[shape.i][shape.j] = 2;
 
     }
+
+    else if(board[shape.i][shape.j] === 7){
+        AddPointsToPacman(200);
+    }
+
     if(currnumofballs===0){
         Draw();
         endGame();
@@ -566,8 +576,8 @@ function FindEmptyCorner() {
 }
 }
 function addClock(){
-    var randomNum=Math.floor((Math.random() * 90) + 1);
-    if(randomNum===1){
+    var randomNum=Math.floor((Math.random() * 30) + 1);
+    if(randomNum===3){
         var i=Math.floor((Math.random() * 10));
         var j=Math.floor((Math.random() * 10));
         if(board[i][j]===0){
@@ -580,9 +590,19 @@ function addClock(){
             board[i][j]=65;
         }
     }
+    else if(randomNum==2){
+        var i=Math.floor((Math.random() * 10));
+        var j=Math.floor((Math.random() * 10));
+        if(board[i][j]===0){
+            board[i][j]=7;
+        } 
+        window.setTimeout(function(){
+            if(board[i][j]===7){
+                board[i][j]=0;
+            }
+        },5000);
 
-
-
+    }
 
 
 
